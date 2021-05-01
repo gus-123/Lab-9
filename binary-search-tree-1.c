@@ -10,31 +10,32 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+//트리의 노드 구조를 구조체로 정의
 typedef struct node {
 	int key;
-	struct node *left;
-	struct node *right;
+	struct node *left;   //왼쪽 노드
+	struct node *right;   //오른쪽 노드
 } Node;
 
 int initializeBST(Node** h);
 
-/* functions that you have to implement */
-void inorderTraversal(Node* ptr);	  /* recursive inorder traversal */
-void preorderTraversal(Node* ptr);    /* recursive preorder traversal */
-void postorderTraversal(Node* ptr);	  /* recursive postorder traversal */
-int insert(Node* head, int key);  /* insert a node to the tree */
-int deleteLeafNode(Node* head, int key);  /* delete the leaf node for the key */
-Node* searchRecursive(Node* ptr, int key);  /* search the node for the key */
-Node* searchIterative(Node* head, int key);  /* search the node for the key */
-int freeBST(Node* head); /* free all memories allocated to the tree */
+//함수 리스트
+void inorderTraversal(Node* ptr);	  //중위 순회 연산
+void preorderTraversal(Node* ptr);    //전위 순회 연산
+void postorderTraversal(Node* ptr);	  //후위 순회 연산
+int insert(Node* head, int key);  //트리에 노드를 추가
+int deleteLeafNode(Node* head, int key);  //트리에 Leaf노드 삭제
+Node* searchRecursive(Node* ptr, int key);  //순환으로 탐색 연산
+Node* searchIterative(Node* head, int key);  //반복으로 탐색 연산
+int freeBST(Node* head); //트리의 메모리 해제
 
-/* you may add your own defined functions if necessary */
+
 
 
 int main()
 {
 	char command;
+    printf("[----- [김현민]  [2018038088] -----]");
 	int key;
 	Node* head = NULL;
 	Node* ptr = NULL;	/* temp */
@@ -111,11 +112,11 @@ int main()
 
 int initializeBST(Node** h) {
 
-	/* if the tree is not empty, then remove all allocated nodes from the tree*/
+	//headNode가 null이 아니면, freeNode를 호출하여 할당된 메모리 모두 해제
 	if(*h != NULL)
 		freeBST(*h);
 
-	/* create a head node */
+	//headNode에 대한 메모리를 할당하여 다시 리턴
 	*h = (Node*)malloc(sizeof(Node));
 	(*h)->left = NULL;	/* root */
 	(*h)->right = *h;
@@ -284,7 +285,7 @@ int freeBST(Node* head)
 {
     Node* p = head;  //p는 head가 가리키는 노드를 할당
 
-	Node* prev = NULL;  //prev 노드를 null로 초기화
+	Node* prev = NULL;  //prev를 null로 초기화
 	while(p != NULL) {
 		prev = p;
 		p = p->right;
