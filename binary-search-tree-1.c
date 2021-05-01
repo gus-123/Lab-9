@@ -204,7 +204,7 @@ int deleteLeafNode(Node* head, int key)
 	Node* deleted = searchIterative(head,key);  //반복으로 탐색 연산을 이용
 	
 	if (deleted == NULL) {  //deleted가 null인 경우
-		printf("\n 찾는 키가 이진트리에 없습니다!\n");
+		printf("\n 삭제 할 키가 이진트리에 없습니다!\n");
 
 		return 0;
 	}
