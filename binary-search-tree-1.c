@@ -197,7 +197,47 @@ int insert(Node* head, int key)
 
 int deleteLeafNode(Node* head, int key)
 {
+    Node* temp;
+	Node* deleted = searchIterative(head,key);  //반복으로 탐색 연산을 이용
+	
+	if (deleted == NULL) {  //deleted가 null인 경우
+		printf("\n 찾는 키가 이진트리에 없습니다!\n");
 
+		return 0;
+	}
+	if ((deleted->left != NULL) || (deleted->right != NULL)) {  //Leaf노드가 아닐 경우
+		printf("\n 노드 %d은 leaf노드가 아닙니다!\n");	
+		
+		return 0;
+	}
+	
+	temp = head->left;  //temp가 head의 left를 참조	
+	if (temp == deleted) {  //노드가 하나인 경우
+		head->left = NULL;  //head의 left는 null을 할당하여 연결을 해제
+		free(deleted);  //deleted의 메모리 할당 해제
+		
+		return 0;
+	}	
+	while (head) {  //노드가 여러개인 경우	
+		if (temp->left == deleted) {  //temp의 left값을 삭제
+			temp->left = NULL;  //temp의 left는 null을 할당하여 연결을 해제 
+			free(deleted);  //deleted의 메모리 할당 해제
+			break;
+		}
+		else if (temp->right == deleted) {  //temp의 right값을 삭제
+			temp->right = NULL;  //temp의 right는 null을 할당하여 연결을 해제  
+			free(deleted);  //deleted의 메모리 할당 해제
+			break;
+		}
+		else if (key > temp->key) {	//삭제 할 값보다 루트노드의 키값이 작은 경우
+			temp = temp->right;  //temp의 right를 temp에 저장
+		}	
+		else {  //삭제 할 값보다 루트노드의 키값이 큰 경우
+			temp = temp->left;  //temp의 left를 temp에 저장
+		}
+	}
+
+	return 0;
 }
 
 Node* searchRecursive(Node* ptr, int key)
