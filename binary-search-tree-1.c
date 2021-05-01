@@ -174,6 +174,7 @@ int insert(Node* head, int key)
 		if (key > temp->key) {  //넣는 값보다 루트노드의 키값이 작은 경우
 			if (temp->right == NULL) {  //temp의 right가 null인 경우 
 				temp->right = node;  //새로운 노드의 주소를 temp의 right에 저장
+                break;
 			}
 			else {
 				temp = temp->right;  //temp의 right를 temp에 저장
@@ -182,6 +183,7 @@ int insert(Node* head, int key)
 		else if (key < temp->key) {  //넣는 값보다 루트노드의 키값이 큰 경우
 			if (temp->left == NULL) {  //temp의 left가 null인 경우 
 				temp->left = node;  //새로운 노드의 주소를 temp의 left에 저장
+                break;
 			}
 			else {
 				temp = temp->left;  //temp의 left를 temp에 저장
