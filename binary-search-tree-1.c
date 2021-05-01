@@ -162,16 +162,16 @@ int insert(Node* head, int key)
 	node->left = NULL;  //새로운 노드의 left는 null을 할당하여 연결을 해제
 	node->right = NULL;  //새로운 노드의 right는 null을 할당하여 연결을 해제
 	
-	if(head->left == NULL) {  //head의 left가 null인 경우
+	if (head->left == NULL) {  //head의 left가 null인 경우
 		head->left = node;  //새로운 노드의 주소를 head의 left에 저장
 
 		return 0;
 	}
-
+    //head의 left가 null이 아닐 경우 
 	temp = head->left;  //temp가 head의 left를 참조
 	while (head) {
 		if (key > temp->key) {  //넣는 값보다 루트노드의 키값이 작은 경우
-			if(temp->right == NULL) {  //temp의 right가 null인 경우 
+			if (temp->right == NULL) {  //temp의 right가 null인 경우 
 				temp->right = node;  //새로운 노드의 주소를 temp의 right에 저장
 			}
 			else {
@@ -179,7 +179,7 @@ int insert(Node* head, int key)
 			}
 		}
 		else if (key < temp->key) {  //넣는 값보다 루트노드의 키값이 큰 경우
-			if(temp->left == NULL) {  //temp의 left가 null인 경우 
+			if (temp->left == NULL) {  //temp의 left가 null인 경우 
 				temp->left = node;  //새로운 노드의 주소를 temp의 left에 저장
 			}
 			else {
@@ -202,12 +202,41 @@ int deleteLeafNode(Node* head, int key)
 
 Node* searchRecursive(Node* ptr, int key)
 {
-
+    if (ptr == NULL) {  //ptr이 null인 경우
+    	return 0;
+	}
+    //ptr이 null이 아닐 경우(탐색) 
+  	if (key == ptr->key) {  //순환으로 탐색 중 원하는 키 값을 발견 했을 경우
+    	return ptr;  //ptr의 주소를 반환
+   	}
+  	else if (key > ptr->key) {  //찾는 값보다 루트노드의 키값이 작은 경우
+    	searchRecursive(ptr->right, key);  //오른쪽 서브트리로 이동
+	}
+  	else {  //찾는 값보다 루트노드의 키값이 큰 경우
+    	searchRecursive(ptr->left, key);  //왼쪽 서브트리로 이동
+	}
 }
 
 Node* searchIterative(Node* head, int key)
 {
-
+    Node* temp;
+	
+	if (temp == NULL) {  //temp가 null인 경우
+    	return 0;
+	}
+    //temp가 null이 아닐 경우(탐색) 
+	temp = head->left;  //temp가 head의 left를 참조
+  	while (temp) {  
+    	if (key == temp->key) {  //반복으로 탐색 중 원하는 키 값을 발견 했을 경우
+			return temp;  //temp의 주소를 반환
+		}
+    	else if (key > temp->key) {  //찾는 값보다 루트노드의 키값이 작은 경우
+			temp = temp->right;  //temp의 right를 temp에 저장
+		}		
+		else {  //찾는 값보다 루트노드의 키값이 큰 경우
+			temp = temp->left;  //temp의 left를 temp에 저장
+		}
+	}
 }
 
 
