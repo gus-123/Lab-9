@@ -127,17 +127,29 @@ int initializeBST(Node** h) {
 
 void inorderTraversal(Node* ptr)
 {
-   
+    if (ptr) {  //중위 순회 연산
+		inorderTraversal(ptr->left); 
+		printf("%d ", ptr->key); 
+		inorderTraversal(ptr->right); 
+	} 
 }
 
 void preorderTraversal(Node* ptr)
 {
-    
+    if (ptr) {  //전위 순회 연산 
+		printf("%d ", ptr->key); 
+		preorderTraversal(ptr->left); 
+		preorderTraversal(ptr->right); 
+	} 
 }
 
 void postorderTraversal(Node* ptr)
 {
-
+    if (ptr) {  //후위 순회 연산
+		postorderTraversal(ptr->left); 
+		postorderTraversal(ptr->right); 
+		printf("%d ", ptr->key); 
+	} 
 }
 
 
